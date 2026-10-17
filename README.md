@@ -159,6 +159,9 @@ node verify/run.mjs             # 终端 B：运行全量验证（默认硬件 G
 - 任意静态托管目录
 - 本地双击单文件 `LUMEN-68.html`
 
+部署完成后已用 headless Edge 实际加载线上页面验证：HTTP 200、`window.__LUMEN_READY__ === true`、66 键、WebGL2、
+约 58 FPS、无 console error；线上页面实测截图见 [`verify/shots/09-live-github-pages.png`](verify/shots/09-live-github-pages.png)。
+
 ## 8. 原始提示词
 
 > 以下为本作品的产品页任务提示词，按原样保留，便于回顾需求与验收标准。
