@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "LUMEN 68 — an interactive 3D mechanical keyboard showcase & configurator built with Three.js and Vite.",
+  "license": "MIT",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "vite build",

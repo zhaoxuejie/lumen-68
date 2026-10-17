@@ -1,8 +1,10 @@
 # LUMEN 68 / 光屿
 
 [![Deploy to GitHub Pages](https://github.com/zhaoxuejie/lumen-68/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/zhaoxuejie/lumen-68/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > 原创概念机械键盘的交互式 3D 产品展示与配置页面。
+> **生成模型：** DeepSeek-V4.1-Flash-1017 ｜ **许可协议：** MIT License
 > **在线演示：** <https://zhaoxuejie.github.io/lumen-68/> ｜ **源码：** <https://github.com/zhaoxuejie/lumen-68>
 > **查看方式 1：** 直接双击根目录的 **`LUMEN-68.html`**（单文件离线版，无需服务器/网络）。
 > **查看方式 2：** `npm run dev` 启动 Vite 开发服务器。
@@ -120,6 +122,7 @@ npm run build:single # 构建 + 内联为单文件，输出根目录 LUMEN-68.ht
 │  ├─ run.mjs                 # 全量功能 + 布局 + 截图测试
 │  └─ shots/                  # 验证截图
 ├─ VERIFICATION.md            # 真实验证记录（命令、PASS/FAIL、环境与限制）
+├─ LICENSE                    # MIT 开源许可协议
 ├─ docs/
 │  ├─ CONTRACT.md             # 团队协作文档（DOM/状态契约）
 │  └─ TEST-API.md             # window.__LUMEN__ 测试接口契约
@@ -210,3 +213,10 @@ node verify/run.mjs             # 终端 B：运行全量验证（默认硬件 G
 - 软件渲染（如 CI 中的 SwiftShader）下动画帧率较低，但交互逻辑与状态收敛不受影响；正常桌面/移动浏览器使用 GPU 渲染。
 - 项目不含后端与支付/购物流程，聚焦产品展示与配置体验。
 - 浏览器需支持 WebGL2（近年的 Edge / Chrome / Firefox / Safari 均可）；若 WebGL 不可用，配置界面仍可操作，3D 区域会显示降级提示。
+
+## 10. 生成说明与许可
+
+- **生成模型：** 本项目——包括 Three.js 3D 键盘模型与交互代码、HTML/CSS 界面、视觉方案与文案、README 与自动化验证方案——由 **DeepSeek-V4.1-Flash-1017** 模型生成（生成日期：2026-10-17）。
+- **协作方式：** 由 Agent Teams 协作完成：Lead 负责 3D 场景、交互与集成，UI Designer 负责产品页视觉与配置面板，QA Verifier 使用 Playwright 驱动真实浏览器完成功能与视觉验收。
+- **开源许可：** 本项目基于 **[MIT License](LICENSE)** 开源，Copyright © 2026 zhaoxuejie (moqian)。
+- 你可以自由使用、复制、修改、合并、发布、分发、再许可和/或销售本软件的副本，但需在副本中保留上述版权声明与许可声明；软件按“现状”提供，不附带任何明示或暗示的担保。
