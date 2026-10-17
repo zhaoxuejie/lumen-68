@@ -1,0 +1,421 @@
+{
+  "app": "LUMEN 68",
+  "mode": "file",
+  "url": "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html",
+  "startedAt": "2026-10-17T13:30:23.852Z",
+  "node": "v22.23.0",
+  "edgePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "edgeExists": true,
+  "dataSource": "src/state.js",
+  "results": [
+    {
+      "name": "初始加载：页面可访问，window.__LUMEN_READY__ === true",
+      "status": "PASS",
+      "detail": "ready=true，测试 API 已暴露（renderer: ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)）",
+      "ms": 123
+    },
+    {
+      "name": "初始加载：无 console error / pageerror",
+      "status": "PASS",
+      "detail": "consoleErrors=0, pageErrors=0（console warning 0 条）",
+      "ms": 496
+    },
+    {
+      "name": "测试 API 契约：方法齐全 / storageKey / version",
+      "status": "PASS",
+      "detail": "version=1.0.0, storageKey=lumen68.config.v1",
+      "ms": 20
+    },
+    {
+      "name": "场景信息：66 键 / WebGL / canvas 尺寸 / 层标签",
+      "status": "PASS",
+      "detail": "renderer=webgl2, pixelRatio=1, canvas=982x586, rows=[15,15,14,13,9]",
+      "ms": 40
+    },
+    {
+      "name": "初始状态为默认配置（lunar/alabaster）",
+      "status": "PASS",
+      "detail": "默认 case/keycap/name/experience/exploded/摘要/DOM 状态均一致；初始 renderTheme 与 state 配色数据一致",
+      "ms": 50
+    },
+    {
+      "name": "DOM 契约：必需节点、属性、内联 favicon",
+      "status": "PASS",
+      "detail": "21 个契约节点齐全；title/lang=zh-CN；favicon 为 data URI；参数 chips 文案齐全",
+      "ms": 28
+    },
+    {
+      "name": "初始桌面截图 1440×900",
+      "status": "PASS",
+      "detail": "verify/shots/08-standalone-01-initial-desktop-1440x900.png (1440x900, 915011 bytes)",
+      "ms": 1530
+    },
+    {
+      "name": "布局 1440×900：无纵向滚动，标题/视口/主要控件在首屏",
+      "status": "PASS",
+      "detail": "scroll=1440x900（无滚动），viewport=984x588，panelOverflow=0，主要控件均在首屏",
+      "ms": 30
+    },
+    {
+      "name": "配色组合 lunar + alabaster：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#b3b8be, capAlpha=#ece7dd, capAccent=#b96a41）",
+      "ms": 393
+    },
+    {
+      "name": "配色组合 lunar + graphite：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#b3b8be, capAlpha=#3a3c41, capAccent=#c9a35f）",
+      "ms": 1030
+    },
+    {
+      "name": "配色组合 lunar + harvest：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#b3b8be, capAlpha=#d9ceb4, capAccent=#6f7d58），截图 verify/shots/08-standalone-04-theme-lunar-harvest.png",
+      "ms": 2492
+    },
+    {
+      "name": "配色组合 obsidian + alabaster：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#1e2024, capAlpha=#ece7dd, capAccent=#b96a41）",
+      "ms": 844
+    },
+    {
+      "name": "配色组合 obsidian + graphite：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#1e2024, capAlpha=#3a3c41, capAccent=#c9a35f），截图 verify/shots/08-standalone-03-theme-obsidian-graphite.png",
+      "ms": 2551
+    },
+    {
+      "name": "配色组合 obsidian + harvest：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#1e2024, capAlpha=#d9ceb4, capAccent=#6f7d58）",
+      "ms": 902
+    },
+    {
+      "name": "配色组合 copper + alabaster：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#a26a49, capAlpha=#ece7dd, capAccent=#b96a41），截图 verify/shots/08-standalone-05-theme-copper-alabaster.png",
+      "ms": 2334
+    },
+    {
+      "name": "配色组合 copper + graphite：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#a26a49, capAlpha=#3a3c41, capAccent=#c9a35f）",
+      "ms": 898
+    },
+    {
+      "name": "配色组合 copper + harvest：3D/选项/摘要/存储同步",
+      "status": "PASS",
+      "detail": "state/theme/renderTheme/aria-pressed/.is-selected/摘要/存储 全部一致（case=#a26a49, capAlpha=#d9ceb4, capAccent=#6f7d58）",
+      "ms": 995
+    },
+    {
+      "name": "重复点击已选外壳不产生状态变化",
+      "status": "PASS",
+      "detail": "保持 copper/harvest",
+      "ms": 233
+    },
+    {
+      "name": "拆解：点击后 layers.caps > layers.plate > 0，按钮/标签/body 状态正确",
+      "status": "PASS",
+      "detail": "caps=3, plate=1.35, case_=0",
+      "ms": 1367
+    },
+    {
+      "name": "拆解截图",
+      "status": "PASS",
+      "detail": "verify/shots/08-standalone-02-exploded-1440x900.png (933723 bytes)",
+      "ms": 1460
+    },
+    {
+      "name": "组装：回到 0，标签隐藏，按钮文案恢复",
+      "status": "PASS",
+      "detail": "layers 全部归零，labelsVisible=false，文案/aria/body 均恢复",
+      "ms": 1350
+    },
+    {
+      "name": "快速连续点击 11 次：whenSettled 后目标与进度一致（open）",
+      "status": "PASS",
+      "detail": "11 次点击 → open，progress=1，文案=组装还原",
+      "ms": 1263
+    },
+    {
+      "name": "再点击 1 次（共 12 次）：whenSettled 后回到 closed，进度误差 < 0.001",
+      "status": "PASS",
+      "detail": "12 次点击 → closed，progress=0，layers 全部归零",
+      "ms": 1306
+    },
+    {
+      "name": "体验模式：默认关闭时物理按键不产生按压",
+      "status": "PASS",
+      "detail": "关闭状态下 A 键无按压",
+      "ms": 242
+    },
+    {
+      "name": "体验模式：开启后开关/状态/提示联动",
+      "status": "PASS",
+      "detail": "experience=on，状态文案=\"已开启 · 直接敲击 A–Z / 空格，或点击键帽\"",
+      "ms": 149
+    },
+    {
+      "name": "体验模式：物理按住 A 键键帽下压，释放后回落",
+      "status": "PASS",
+      "detail": "按住 press=0.729，offset=-0.117，echo=\"A\"，释放后回落",
+      "ms": 214
+    },
+    {
+      "name": "体验模式：空格键触发且页面不滚动",
+      "status": "PASS",
+      "detail": "Space press=0.128，释放回落，scrollY=0",
+      "ms": 198
+    },
+    {
+      "name": "体验模式：pressVirtual/releaseVirtual 与物理路径等效",
+      "status": "PASS",
+      "detail": "pressVirtual/releaseVirtual 生效",
+      "ms": 215
+    },
+    {
+      "name": "体验模式：用 getKey().screen 坐标鼠标点击 KeyF 触发",
+      "status": "PASS",
+      "detail": "screen=(409.4, 499.5)，鼠标按压成功，click 后 echo=\"A ␣ A F F\"",
+      "ms": 382
+    },
+    {
+      "name": "体验模式：输入框聚焦键入不触发键帽、文本正常、页面不滚动",
+      "status": "PASS",
+      "detail": "输入值=\"hello keyboard\" 已同步 store；采样最大 press=0；scrollY=0",
+      "ms": 1120
+    },
+    {
+      "name": "命名清空：摘要显示“未命名配置”",
+      "status": "PASS",
+      "detail": "#summary-name=\"未命名配置\"，store profileName 为空",
+      "ms": 140
+    },
+    {
+      "name": "体验模式：关闭后物理按键不再触发",
+      "status": "PASS",
+      "detail": "关闭后 A 键无按压，checkbox/body 状态正确",
+      "ms": 295
+    },
+    {
+      "name": "视角：自动旋转开关存在且默认关闭（相机测试前置）",
+      "status": "PASS",
+      "detail": "默认关闭",
+      "ms": 17
+    },
+    {
+      "name": "视角：canvas 拖拽后相机 position 变化",
+      "status": "PASS",
+      "detail": "位移 27.087 > 阈值 0.227；position=[-17.751,14.527,3.992]",
+      "ms": 801
+    },
+    {
+      "name": "视角：滚轮改变相机距离",
+      "status": "PASS",
+      "detail": "distance 22.66 → 19.034（Δ=3.627）",
+      "ms": 612
+    },
+    {
+      "name": "视角：点击 #btn-reset-view 回到初始相机（容差已注明）",
+      "status": "PASS",
+      "detail": "positionΔ=0, targetΔ=0, distanceΔ=0，容差=0.227",
+      "ms": 1135
+    },
+    {
+      "name": "持久化前置：清空存储并 reload 回到默认",
+      "status": "PASS",
+      "detail": "存储清空后为默认配置",
+      "ms": 537
+    },
+    {
+      "name": "持久化：设置铜色 + 麦田 + 命名，reload 后状态与摘要恢复",
+      "status": "PASS",
+      "detail": "reload 后恢复 copper/harvest/QA BUILD 68；预埋 key 保留",
+      "ms": 2346
+    },
+    {
+      "name": "持久化：恢复默认只移除本页 key，保留其它 localStorage，刷新后为默认",
+      "status": "PASS",
+      "detail": "本页 key 已移除、sentinel 保留、toast=\"已恢复默认配置 · 月银 / 雾白\"、刷新后默认",
+      "ms": 2089
+    },
+    {
+      "name": "命名 maxlength=24：键盘输入超长文本被截断",
+      "status": "PASS",
+      "detail": "输入 36 字符后 value 长度=24，store 长度=24",
+      "ms": 2386
+    },
+    {
+      "name": "布局 1280×800：无滚动，标题/视口/主要控件在首屏",
+      "status": "PASS",
+      "detail": "无滚动，viewport=863x501，panelOverflow=0，截图 verify/shots/08-standalone-07-desktop-1280x800.png",
+      "ms": 1777
+    },
+    {
+      "name": "移动端 390×844：无横向滚动，键盘在视口内，面板起始可见",
+      "status": "PASS",
+      "detail": "无横向滚动，viewport 高 304px，采样键 5/5 inView，截图 verify/shots/08-standalone-06-mobile-390x844.png",
+      "ms": 1319
+    },
+    {
+      "name": "拆解态层标签 1440x900：在 #viewport 内、不遮工具条、不压产品",
+      "status": "PASS",
+      "detail": "标签 3/3 均在 #viewport 内、不遮工具条；产品投影重叠=caps:0%/plate:0%/case:0%；截图 verify/shots/08-standalone-02b-exploded-labels-1440x900.png；拆解按钮截图 verify/shots/08-standalone-02e-btn-explode-contrast.png，文字色 rgb(255, 241, 222)，背景 rgba(0, 0, 0, 0)",
+      "ms": 4047
+    },
+    {
+      "name": "拆解态层标签 1280x800：在 #viewport 内、不遮工具条、不压产品",
+      "status": "PASS",
+      "detail": "标签 3/3 均在 #viewport 内、不遮工具条；产品投影重叠=caps:0%/plate:0%/case:0%；截图 verify/shots/08-standalone-02c-exploded-labels-1280x800.png",
+      "ms": 4382
+    },
+    {
+      "name": "拆解态层标签 390x844：在 #viewport 内、不遮工具条、不压产品",
+      "status": "PASS",
+      "detail": "标签 3/3 均在 #viewport 内、不遮工具条；产品投影重叠=caps:0%/plate:0%/case:0%；截图 verify/shots/08-standalone-02d-exploded-labels-390x844.png",
+      "ms": 3823
+    },
+    {
+      "name": "拆解态层标签详细测量（按 viewport）",
+      "status": "INFO",
+      "detail": "[{\"viewport\":\"1440x900\",\"viewportRect\":{\"top\":266.21875,\"left\":40.3125,\"right\":1023.859375,\"bottom\":854,\"width\":983.546875,\"height\":587.78125},\"labels\":[{\"layer\":\"caps\",\"text\":\"01 · 键帽 / KEYCAPS\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":411.04376220703125,\"left\":59.3125,\"right\":181.3125,\"bottom\":433.79376220703125,\"width\":122,\"height\":22.75}},{\"layer\":\"plate\",\"text\":\"02 · 定位板 / PLATE\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":490.34375,\"left\":59.3125,\"right\":179.53125,\"bottom\":513.09375,\"width\":120.21875,\"height\":22.75}},{\"layer\":\"case\",\"text\":\"03 · 底壳 / CASE\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":556.2437744140625,\"left\":59.3125,\"right\":164.484375,\"bottom\":578.9937744140625,\"width\":105.171875,\"height\":22.75}}],\"overlaps\":[{\"layer\":\"caps\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":411.04376220703125,\"left\":59.3125,\"right\":181.3125,\"bottom\":433.79376220703125,\"width\":122,\"height\":22.75}},{\"layer\":\"plate\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":490.34375,\"left\":59.3125,\"right\":179.53125,\"bottom\":513.09375,\"width\":120.21875,\"height\":22.75}},{\"layer\":\"case\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":556.2437744140625,\"left\":59.3125,\"right\":164.484375,\"bottom\":578.9937744140625,\"width\":105.171875,\"height\":22.75}}],\"shot\":\"verify/shots/08-standalone-02b-exploded-labels-1440x900.png\"},{\"viewport\":\"1280x800\",\"viewportRect\":{\"top\":252.890625,\"left\":35.828125,\"right\":899.296875,\"bottom\":754,\"width\":863.46875,\"height\":501.109375},\"labels\":[{\"layer\":\"caps\",\"text\":\"01 · 键帽 / KEYCAPS\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":371.015625,\"left\":54.828125,\"right\":176.828125,\"bottom\":393.765625,\"width\":122,\"height\":22.75}},{\"layer\":\"plate\",\"text\":\"02 · 定位板 / PLATE\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":440.81561279296875,\"left\":54.828125,\"right\":175.046875,\"bottom\":463.56561279296875,\"width\":120.21875,\"height\":22.75}},{\"layer\":\"case\",\"text\":\"03 · 底壳 / CASE\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":498.71563720703125,\"left\":54.828125,\"right\":160,\"bottom\":521.4656372070312,\"width\":105.171875,\"height\":22.75}}],\"overlaps\":[{\"layer\":\"caps\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":371.015625,\"left\":54.828125,\"right\":176.828125,\"bottom\":393.765625,\"width\":122,\"height\":22.75}},{\"layer\":\"plate\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":440.81561279296875,\"left\":54.828125,\"right\":175.046875,\"bottom\":463.56561279296875,\"width\":120.21875,\"height\":22.75}},{\"layer\":\"case\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":498.71563720703125,\"left\":54.828125,\"right\":160,\"bottom\":521.4656372070312,\"width\":105.171875,\"height\":22.75}}],\"shot\":\"verify/shots/08-standalone-02c-exploded-labels-1280x800.png\"},{\"viewport\":\"390x844\",\"viewportRect\":{\"top\":269.65625,\"left\":16,\"right\":374,\"bottom\":573.484375,\"width\":358,\"height\":303.828125},\"labels\":[{\"layer\":\"caps\",\"text\":\"01 · 键帽\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":293.28125,\"left\":29,\"right\":94.921875,\"bottom\":316.03125,\"width\":65.921875,\"height\":22.75}},{\"layer\":\"plate\",\"text\":\"02 · 定位板\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":293.28125,\"left\":103,\"right\":178.359375,\"bottom\":316.03125,\"width\":75.359375,\"height\":22.75}},{\"layer\":\"case\",\"text\":\"03 · 底壳\",\"opacity\":0.96,\"display\":\"block\",\"rect\":{\"top\":293.28125,\"left\":186,\"right\":251.921875,\"bottom\":316.03125,\"width\":65.921875,\"height\":22.75}}],\"overlaps\":[{\"layer\":\"caps\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":293.28125,\"left\":29,\"right\":94.921875,\"bottom\":316.03125,\"width\":65.921875,\"height\":22.75}},{\"layer\":\"plate\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":293.28125,\"left\":103,\"right\":178.359375,\"bottom\":316.03125,\"width\":75.359375,\"height\":22.75}},{\"layer\":\"case\",\"productOverlapRatio\":0,\"toolbarOverlapPx\":0,\"rect\":{\"top\":293.28125,\"left\":186,\"right\":251.921875,\"bottom\":316.03125,\"width\":65.921875,\"height\":22.75}}],\"shot\":\"verify/shots/08-standalone-02d-exploded-labels-390x844.png\"}]",
+      "ms": 0
+    },
+    {
+      "name": "网络：单文件无任何外部请求（仅 file:// 与内联资源）",
+      "status": "PASS",
+      "detail": "共 5 个请求（file:// 5 个、无 http(s) 外链）；DOM 无外链资源",
+      "ms": 12
+    },
+    {
+      "name": "全程无 console error / pageerror / 失败请求",
+      "status": "PASS",
+      "detail": "consoleError=0，pageError=0，失败请求=0（console warning 0 条）",
+      "ms": 410
+    },
+    {
+      "name": "测试期间页面未被额外重载（HMR 稳定性）",
+      "status": "PASS",
+      "detail": "主框架导航 5 次（初始 1 + 主动 reload 4），无 HMR 重载",
+      "ms": 10
+    }
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "requestCount": 5,
+  "screenshots": [
+    {
+      "name": "08-standalone-01-initial-desktop-1440x900.png",
+      "path": "verify/shots/08-standalone-01-initial-desktop-1440x900.png",
+      "bytes": 915011,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-04-theme-lunar-harvest.png",
+      "path": "verify/shots/08-standalone-04-theme-lunar-harvest.png",
+      "bytes": 924554,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-03-theme-obsidian-graphite.png",
+      "path": "verify/shots/08-standalone-03-theme-obsidian-graphite.png",
+      "bytes": 931025,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-05-theme-copper-alabaster.png",
+      "path": "verify/shots/08-standalone-05-theme-copper-alabaster.png",
+      "bytes": 917843,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-02-exploded-1440x900.png",
+      "path": "verify/shots/08-standalone-02-exploded-1440x900.png",
+      "bytes": 933723,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-07-desktop-1280x800.png",
+      "path": "verify/shots/08-standalone-07-desktop-1280x800.png",
+      "bytes": 780755,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "name": "08-standalone-06-mobile-390x844.png",
+      "path": "verify/shots/08-standalone-06-mobile-390x844.png",
+      "bytes": 307012,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "08-standalone-02b-exploded-labels-1440x900.png",
+      "path": "verify/shots/08-standalone-02b-exploded-labels-1440x900.png",
+      "bytes": 933888,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "08-standalone-02e-btn-explode-contrast.png",
+      "path": "verify/shots/08-standalone-02e-btn-explode-contrast.png",
+      "bytes": 4940,
+      "width": 304,
+      "height": 52
+    },
+    {
+      "name": "08-standalone-02c-exploded-labels-1280x800.png",
+      "path": "verify/shots/08-standalone-02c-exploded-labels-1280x800.png",
+      "bytes": 785267,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "name": "08-standalone-02d-exploded-labels-390x844.png",
+      "path": "verify/shots/08-standalone-02d-exploded-labels-390x844.png",
+      "bytes": 314661,
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "notes": [
+    "GL backend: auto (auto = headless Edge hardware GPU through ANGLE/D3D11; LUMEN_GL=swiftshader forces software WebGL).",
+    "Renderer/backend info is captured from the page and stored in report.rendererInfo.",
+    "Camera reset tolerance: max(0.02, 1% of initial camera distance).",
+    "whenSettled() guarantees |progress-target| < 0.001, so layer-offset zero checks allow 0.005 slack."
+  ],
+  "browserVersion": "153.0.4234.48",
+  "rendererInfo": {
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)"
+  },
+  "storageAvailable": true,
+  "localStorageDump": [],
+  "glMode": "auto",
+  "mainFrameNavigations": [
+    "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html",
+    "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html",
+    "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html",
+    "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html",
+    "file:///D:/projectDsh/moqian-3d-key/LUMEN-68.html"
+  ],
+  "metaNavigations": 5,
+  "finishedAt": "2026-10-17T13:31:22.172Z",
+  "durationMs": 58320,
+  "summary": {
+    "pass": 48,
+    "fail": 0,
+    "skip": 0
+  },
+  "verdict": "PASS"
+}

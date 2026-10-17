@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LUMEN 68 · 光屿 — 68 键机械键盘</title>
+    <meta name="description" content="QA harness self-test fixture (not the product page)." />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0a09'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23d59a6a' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        background: #0b0a09;
+        color: #f2ede4;
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      }
+      .app-shell { height: 100vh; display: flex; flex-direction: column; padding: 0 32px; }
+      .site-header { height: 60px; flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(242, 237, 228, 0.12); }
+      .brand-name { font-weight: 700; letter-spacing: 0.24em; font-size: 15px; }
+      .brand-sub { margin-left: 10px; font-size: 10px; letter-spacing: 0.18em; color: rgba(242, 237, 228, 0.42); }
+      .header-badge { font-size: 10px; letter-spacing: 0.16em; color: rgba(242, 237, 228, 0.64); }
+      .showcase { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; padding: 14px 0; }
+      .stage { display: flex; flex-direction: column; min-height: 0; }
+      .hero { flex: 0 0 150px; min-height: 0; padding-top: 6px; }
+      .hero h1 { margin: 0; font-size: clamp(28px, 3.2vw, 44px); font-weight: 600; letter-spacing: 0.02em; }
+      .hero-sub { margin: 4px 0 8px; color: rgba(242, 237, 228, 0.64); font-size: 12px; letter-spacing: 0.2em; }
+      .hero-copy { margin: 0 0 10px; max-width: 52ch; font-size: 13px; line-height: 1.65; color: rgba(242, 237, 228, 0.56); }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+      .chips li { padding: 5px 10px; border: 1px solid rgba(242, 237, 228, 0.14); border-radius: 999px; font-size: 9px; letter-spacing: 0.16em; color: rgba(242, 237, 228, 0.64); }
+      #viewport { position: relative; flex: 1; min-height: 0; border: 1px solid rgba(242, 237, 228, 0.1); border-radius: 18px; overflow: hidden; }
+      canvas.scene-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+      #layer-labels { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+      .layer-label { position: absolute; left: 18px; padding: 3px 8px; border-radius: 6px; background: rgba(24, 22, 20, 0.7); border: 1px solid rgba(242, 237, 228, 0.14); font-size: 10px; letter-spacing: 0.14em; opacity: 0; }
+      .viewport-toolbar { position: absolute; left: 14px; bottom: 14px; display: flex; gap: 10px; align-items: center; }
+      .viewport-toolbar button, #btn-explode, #btn-restore { font: inherit; font-size: 12px; color: #f2ede4; background: rgba(24, 22, 20, 0.72); border: 1px solid rgba(242, 237, 228, 0.18); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+      .viewport-toolbar label { font-size: 11px; color: rgba(242, 237, 228, 0.64); display: flex; align-items: center; gap: 6px; }
+      #experience-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-size: 11px; letter-spacing: 0.12em; color: rgba(242, 237, 228, 0.72); background: rgba(24, 22, 20, 0.72); border: 1px solid rgba(242, 237, 228, 0.14); border-radius: 999px; padding: 6px 12px; }
+      .panel { min-height: 0; height: 100%; overflow-y: auto; padding: 16px; border: 1px solid rgba(242, 237, 228, 0.12); border-radius: 18px; background: rgba(24, 22, 20, 0.66); display: flex; flex-direction: column; gap: 12px; }
+      .panel-kicker { margin: 0; font-size: 9px; letter-spacing: 0.22em; color: #d59a6a; }
+      .panel-title { margin: 0; font-size: 16px; font-weight: 600; }
+      .field { display: flex; flex-direction: column; gap: 8px; }
+      .field h3 { margin: 0; font-size: 10px; letter-spacing: 0.16em; color: rgba(242, 237, 228, 0.42); font-weight: 500; }
+      .options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+      .options button { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; padding: 8px; font: inherit; font-size: 11px; color: rgba(242, 237, 228, 0.72); background: rgba(18, 16, 14, 0.7); border: 1px solid rgba(242, 237, 228, 0.12); border-radius: 10px; cursor: pointer; text-align: left; }
+      .options button.is-selected { border-color: #d59a6a; color: #f2ede4; box-shadow: inset 0 0 0 1px rgba(213, 154, 106, 0.4); }
+      .swatch { width: 100%; height: 6px; border-radius: 3px; }
+      .swatch.tri { display: flex; gap: 2px; height: 8px; }
+      .swatch.tri i { flex: 1; border-radius: 2px; }
+      .summary p { margin: 2px 0; font-size: 12px; color: rgba(242, 237, 228, 0.72); }
+      #summary-name { font-size: 14px; color: #f2ede4; }
+      #summary-case-meta, #summary-keycap-meta, #save-status { font-size: 10px; color: rgba(242, 237, 228, 0.42); }
+      .switch { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(242, 237, 228, 0.72); }
+      #experience-status { margin: 0; font-size: 10px; color: rgba(242, 237, 228, 0.42); }
+      .name-field input { font: inherit; font-size: 13px; padding: 8px 10px; color: #f2ede4; background: rgba(18, 16, 14, 0.7); border: 1px solid rgba(242, 237, 228, 0.16); border-radius: 10px; }
+      .site-footer { height: 40px; flex: 0 0 auto; display: flex; align-items: center; gap: 16px; font-size: 10px; letter-spacing: 0.12em; color: rgba(242, 237, 228, 0.42); border-top: 1px solid rgba(242, 237, 228, 0.12); }
+      #key-echo { color: #d59a6a; min-width: 44px; }
+      #toast { margin-top: auto; min-height: 20px; font-size: 11px; color: #ecb98a; opacity: 0; transition: opacity 0.2s; }
+      #toast.show { opacity: 1; }
+      @media (max-width: 1099px) {
+        body { overflow: auto; overflow-x: hidden; }
+        .app-shell { height: auto; min-height: 100vh; padding: 0 20px; }
+        .showcase { display: block; padding: 12px 0; }
+        .stage { display: block; }
+        .hero { height: auto; padding: 8px 0 14px; }
+        #viewport { height: clamp(300px, 44svh, 460px); }
+        .panel { height: auto; min-height: 0; margin-top: 16px; }
+        .site-footer { height: auto; padding: 14px 0; flex-wrap: wrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="brand"><span class="brand-name">LUMEN</span><span class="brand-sub">STUDIO · 光屿</span></div>
+        <span class="header-badge">概念产品 · CONCEPT</span>
+      </header>
+
+      <div class="showcase">
+        <div class="stage">
+          <section class="hero">
+            <h1>LUMEN 68</h1>
+            <p class="hero-sub">光屿 · 68 键机械键盘</p>
+            <p class="hero-copy">把一束光，收进 68 次敲击。CNC 铝合金机身与 Gasket 悬浮结构，为桌面留出呼吸的空间。</p>
+            <ul class="chips">
+              <li>68 KEYS / 紧凑布局</li>
+              <li>CNC ALUMINUM / 铝合金</li>
+              <li>GASKET / 悬浮结构</li>
+              <li>HOT-SWAP / 热插拔</li>
+            </ul>
+          </section>
+          <div id="viewport">
+            <canvas class="scene-canvas"></canvas>
+            <div id="layer-labels">
+              <span class="layer-label" data-layer="caps">键帽 CAPS</span>
+              <span class="layer-label" data-layer="plate">定位板 PLATE</span>
+              <span class="layer-label" data-layer="case">底壳 CASE</span>
+            </div>
+            <div class="viewport-toolbar">
+              <button id="btn-reset-view" type="button">复位视角</button>
+              <label><input id="toggle-autorotate" type="checkbox" /> 自动展示</label>
+            </div>
+            <div id="experience-hint" hidden>输入体验已开启 · 敲击键盘试试</div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <p class="panel-kicker">CONFIGURE / 01</p>
+          <h2 class="panel-title">配置你的 LUMEN 68</h2>
+
+          <div class="field">
+            <h3>外壳 · CASE FINISH</h3>
+            <div id="case-options" class="options"></div>
+          </div>
+
+          <div class="field">
+            <h3>键帽 · KEYCAP SET</h3>
+            <div id="keycap-options" class="options"></div>
+          </div>
+
+          <div class="field summary">
+            <h3>配置摘要 · YOUR BUILD</h3>
+            <p id="summary-name"></p>
+            <p><span id="summary-case"></span> <span id="summary-case-meta"></span></p>
+            <p><span id="summary-keycap"></span> <span id="summary-keycap-meta"></span></p>
+            <p id="save-status"></p>
+          </div>
+
+          <button id="btn-explode" type="button" aria-pressed="false"><span id="btn-explode-label">拆解视图</span></button>
+
+          <label class="switch"><input id="toggle-experience" type="checkbox" /><span>键帽体验</span></label>
+          <p id="experience-status">关闭 · 用鼠标配置</p>
+
+          <div class="field name-field">
+            <label for="profile-name">配置命名</label>
+            <input id="profile-name" maxlength="24" type="text" />
+          </div>
+
+          <button id="btn-restore" type="button">恢复默认</button>
+          <div id="toast" role="status" aria-live="polite"></div>
+        </aside>
+      </div>
+
+      <footer class="site-footer">
+        <span>拖拽旋转 · 滚轮缩放</span>
+        <span id="key-echo"></span>
+        <span>配置仅保存在本机</span>
+      </footer>
+    </div>
+
+    <script>
+      /* ================================================================
+       * QA harness self-test fixture. NOT the product page. It implements
+       * the DOM contract + LumenTestApi from docs/TEST-API.md minimally so
+       * the harness itself can be dry-run before the real app is ready.
+       * ================================================================ */
+      const STORAGE_KEY = 'lumen68.config.v1';
+      const PROFILE_NAME_MAX = 24;
+      const UNSAVED_NAME = '未命名配置';
+      const CASES = [
+        { id: 'lunar', name: '月银', en: 'Lunar Silver', finish: '喷砂阳极氧化', caseColor: '#c4c8cd' },
+        { id: 'obsidian', name: '曜石黑', en: 'Obsidian', finish: '细砂阳极氧化', caseColor: '#212327' },
+        { id: 'copper', name: '暮铜', en: 'Sienna Copper', finish: 'PVD 拉丝镀铜', caseColor: '#a9704f' },
+      ];
+      const KEYCAPS = [
+        { id: 'alabaster', name: '雾白', en: 'Alabaster', material: 'PBT · 热升华', mood: '暖白与陶土橙', colors: ['#eae5da', '#d5cec1', '#c8784c'] },
+        { id: 'graphite', name: '石墨', en: 'Graphite', material: 'PBT · 双色成型', mood: '炭灰与黄铜', colors: ['#3a3c41', '#2b2d31', '#c9a35f'] },
+        { id: 'harvest', name: '麦田', en: 'Harvest', material: 'PBT · 热升华', mood: '麦穗米与橄榄绿', colors: ['#d8cdb4', '#b9ac90', '#7d8b64'] },
+      ];
+      const DEFAULTS = { caseId: 'lunar', keycapId: 'alabaster', profileName: '我的 LUMEN 68' };
+      const CASE_BY_ID = Object.fromEntries(CASES.map((item) => [item.id, item]));
+      const KEYCAP_BY_ID = Object.fromEntries(KEYCAPS.map((item) => [item.id, item]));
+
+      let config = readStored() || { ...DEFAULTS };
+      const state = { experience: false, exploded: false, explodeTarget: 0 };
+      let explodeProgress = 0;
+      let camera = { position: [4.2, 3.2, 6.4], target: [0, 0.5, 0] };
+      const initialCamera = JSON.parse(JSON.stringify(camera));
+      let orbit = sphericalFrom(camera.position, camera.target);
+
+      const canvas = document.querySelector('.scene-canvas');
+      const ctx = canvas.getContext('2d');
+      const caseOptions = document.querySelector('#case-options');
+      const keycapOptions = document.querySelector('#keycap-options');
+      const nameInput = document.querySelector('#profile-name');
+      const explodeButton = document.querySelector('#btn-explode');
+      const explodeLabel = document.querySelector('#btn-explode-label');
+      const experienceInput = document.querySelector('#toggle-experience');
+      const experienceStatus = document.querySelector('#experience-status');
+      const experienceHint = document.querySelector('#experience-hint');
+      const toastEl = document.querySelector('#toast');
+      const keyEcho = document.querySelector('#key-echo');
+      let toastTimer = 0;
+
+      // ---- key inventory: 66 keys, rows [15,15,14,13,9] ----------------
+      const CODES = [
+        'Escape','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal','Backspace','Home',
+        'Tab','KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight','Backslash','Delete',
+        'CapsLock','KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote','Enter','PageUp',
+        'ShiftLeft','KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','ShiftRight','ArrowUp',
+        'PageDown','ControlLeft','MetaLeft','AltLeft','Space','AltRight','ArrowLeft','ArrowDown','ArrowRight',
+      ];
+      const ROWS = [15, 15, 14, 13, 9];
+      const keyByCode = {};
+      const keys = [];
+      let cursor = 0;
+      ROWS.forEach((count, row) => {
+        for (let col = 0; col < count && cursor < CODES.length; col += 1, cursor += 1) {
+          const code = CODES[cursor];
+          const label = labelFor(code);
+          const key = { code, label, row, col, target: 0, press: 0, pressed: false, offset: 0 };
+          keyByCode[code] = key;
+          keys.push(key);
+        }
+      });
+
+      function labelFor(code) {
+        if (/^Key[A-Z]$/.test(code)) return code.slice(3);
+        if (/^Digit[0-9]$/.test(code)) return code.slice(5);
+        const map = { Space: 'Space', Escape: 'Esc', Enter: 'Enter', Backspace: 'Backspace', Tab: 'Tab', ShiftLeft: 'Shift', ShiftRight: 'Shift', ControlLeft: 'Ctrl', AltLeft: 'Alt', AltRight: 'Alt', MetaLeft: 'Meta' };
+        return map[code] || code;
+      }
+      function round(value) { return Math.round(value * 1000) / 1000; }
+
+      // ---- storage -----------------------------------------------------
+      function readStored() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          return {
+            caseId: CASE_BY_ID[parsed.caseId] ? parsed.caseId : DEFAULTS.caseId,
+            keycapId: KEYCAP_BY_ID[parsed.keycapId] ? parsed.keycapId : DEFAULTS.keycapId,
+            profileName: typeof parsed.profileName === 'string' ? parsed.profileName.slice(0, PROFILE_NAME_MAX) : DEFAULTS.profileName,
+          };
+        } catch { return null; }
+      }
+      let storageAvailable = true;
+      function persist() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+          storageAvailable = true;
+        } catch { storageAvailable = false; }
+        document.querySelector('#save-status').textContent = storageAvailable ? '已自动保存 · 本机' : '仅本次会话';
+      }
+
+      // ---- options / summary / state sync ------------------------------
+      function buildOptions() {
+        caseOptions.innerHTML = '';
+        for (const item of CASES) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.dataset.case = item.id;
+          button.setAttribute('aria-pressed', 'false');
+          button.innerHTML = `<span class="swatch" style="background:${item.caseColor}"></span><span>${item.name}</span>`;
+          button.addEventListener('click', () => setCase(item.id));
+          caseOptions.append(button);
+        }
+        keycapOptions.innerHTML = '';
+        for (const item of KEYCAPS) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.dataset.keycap = item.id;
+          button.setAttribute('aria-pressed', 'false');
+          button.innerHTML = `<span class="swatch tri">${item.colors.map((color) => `<i style="background:${color}"></i>`).join('')}</span><span>${item.name}</span>`;
+          button.addEventListener('click', () => setKeycap(item.id));
+          keycapOptions.append(button);
+        }
+      }
+
+      function displayName() {
+        const trimmed = config.profileName.trim();
+        return trimmed.length ? trimmed : UNSAVED_NAME;
+      }
+
+      function syncUI() {
+        const caseItem = CASE_BY_ID[config.caseId] || CASES[0];
+        const keycapItem = KEYCAP_BY_ID[config.keycapId] || KEYCAPS[0];
+        for (const button of caseOptions.querySelectorAll('button')) {
+          const on = button.dataset.case === config.caseId;
+          button.setAttribute('aria-pressed', String(on));
+          button.classList.toggle('is-selected', on);
+        }
+        for (const button of keycapOptions.querySelectorAll('button')) {
+          const on = button.dataset.keycap === config.keycapId;
+          button.setAttribute('aria-pressed', String(on));
+          button.classList.toggle('is-selected', on);
+        }
+        document.querySelector('#summary-name').textContent = displayName();
+        document.querySelector('#summary-case').textContent = `${caseItem.name} · ${caseItem.en}`;
+        document.querySelector('#summary-case-meta').textContent = `${caseItem.finish} · 铝合金一体底壳`;
+        document.querySelector('#summary-keycap').textContent = `${keycapItem.name} · ${keycapItem.en}`;
+        document.querySelector('#summary-keycap-meta').textContent = `${keycapItem.material} · ${keycapItem.mood}`;
+        if (document.activeElement !== nameInput && nameInput.value !== config.profileName) nameInput.value = config.profileName;
+        explodeButton.setAttribute('aria-pressed', String(state.exploded));
+        explodeLabel.textContent = state.exploded ? '组装还原' : '拆解视图';
+        document.body.dataset.exploded = state.exploded ? 'open' : 'closed';
+        document.body.dataset.experience = state.experience ? 'on' : 'off';
+        document.body.dataset.case = config.caseId;
+        experienceInput.checked = state.experience;
+        experienceStatus.textContent = state.experience ? '已开启 · 直接敲击键盘体验' : '关闭 · 用鼠标配置';
+        if (state.experience) experienceHint.removeAttribute('hidden');
+        else experienceHint.setAttribute('hidden', '');
+        const labelMap = { caps: 1.6, plate: 0.62, case: 0 };
+        for (const el of document.querySelectorAll('#layer-labels .layer-label')) {
+          const distance = labelMap[el.dataset.layer] || 0;
+          el.style.opacity = String(explodeProgress > 0.02 ? 0.9 : 0);
+          el.style.transform = `translateY(${-distance * explodeProgress * 40}px)`;
+        }
+      }
+
+      // ---- config commands --------------------------------------------
+      function setCase(id) {
+        if (!CASE_BY_ID[id] || config.caseId === id) return;
+        config = { ...config, caseId: id };
+        persist();
+        syncUI();
+        draw();
+      }
+      function setKeycap(id) {
+        if (!KEYCAP_BY_ID[id] || config.keycapId === id) return;
+        config = { ...config, keycapId: id };
+        persist();
+        syncUI();
+        draw();
+      }
+      function setProfileName(name) {
+        const clean = String(name).replace(/[\u0000-\u001f]/g, '').slice(0, PROFILE_NAME_MAX);
+        if (clean === config.profileName) return;
+        config = { ...config, profileName: clean };
+        persist();
+        syncUI();
+      }
+      function restoreDefaults() {
+        try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+        config = { ...DEFAULTS };
+        syncUI();
+        draw();
+        toast('已恢复默认配置。');
+      }
+      function setExperience(on) {
+        state.experience = Boolean(on);
+        syncUI();
+      }
+      function toggleExplode() {
+        state.exploded = !state.exploded;
+        state.explodeTarget = state.exploded ? 1 : 0;
+        syncUI();
+        return state.explodeTarget;
+      }
+      function setExploded(on) {
+        state.exploded = Boolean(on);
+        state.explodeTarget = state.exploded ? 1 : 0;
+        syncUI();
+      }
+      function setKeyTarget(code, on) {
+        const key = keyByCode[code];
+        if (!key) return;
+        key.target = on ? 1 : 0;
+        if (on) {
+          keyEcho.textContent = key.label;
+          keyEcho.classList.add('is-active');
+        } else {
+          keyEcho.classList.remove('is-active');
+        }
+      }
+      function toast(message) {
+        toastEl.textContent = message;
+        toastEl.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove('show'), 4000);
+      }
+
+      // ---- camera ------------------------------------------------------
+      function sphericalFrom(position, target) {
+        const dx = position[0] - target[0];
+        const dy = position[1] - target[1];
+        const dz = position[2] - target[2];
+        const radius = Math.hypot(dx, dy, dz);
+        return { radius, theta: Math.atan2(dx, dz), phi: Math.acos(Math.min(1, Math.max(-1, dy / radius))) };
+      }
+      function applyOrbit() {
+        const sin = Math.sin(orbit.phi);
+        camera.position = [
+          camera.target[0] + orbit.radius * sin * Math.sin(orbit.theta),
+          camera.target[1] + orbit.radius * Math.cos(orbit.phi),
+          camera.target[2] + orbit.radius * sin * Math.cos(orbit.theta),
+        ];
+      }
+      function cameraDistance() {
+        return Math.hypot(
+          camera.position[0] - camera.target[0],
+          camera.position[1] - camera.target[1],
+          camera.position[2] - camera.target[2]
+        );
+      }
+      function cameraSnapshot() {
+        return { position: [...camera.position], target: [...camera.target], distance: cameraDistance() };
+      }
+      function resetCamera() {
+        camera = JSON.parse(JSON.stringify(initialCamera));
+        orbit = sphericalFrom(camera.position, camera.target);
+        toast('视角已复位');
+      }
+
+      // ---- physical input ---------------------------------------------
+      function isTextTarget(target) {
+        return target instanceof Element && target.matches('input, textarea, select, [contenteditable="true"]');
+      }
+      window.addEventListener('keydown', (event) => {
+        if (isTextTarget(event.target)) return;
+        if (!state.experience) return;
+        const key = keyByCode[event.code];
+        if (!key) return;
+        event.preventDefault();
+        setKeyTarget(event.code, true);
+      });
+      window.addEventListener('keyup', (event) => {
+        if (isTextTarget(event.target)) return;
+        if (!state.experience) return;
+        const key = keyByCode[event.code];
+        if (!key) return;
+        setKeyTarget(event.code, false);
+      });
+
+      // ---- pointer / wheel --------------------------------------------
+      let drag = null;
+      canvas.addEventListener('pointerdown', (event) => {
+        drag = { x: event.clientX, y: event.clientY };
+        if (state.experience) setKeyTarget('KeyF', true);
+        if (canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+      });
+      canvas.addEventListener('pointermove', (event) => {
+        if (!drag) return;
+        const dx = event.clientX - drag.x;
+        const dy = event.clientY - drag.y;
+        drag = { x: event.clientX, y: event.clientY };
+        orbit.theta -= dx * 0.005;
+        orbit.phi = Math.min(Math.PI - 0.2, Math.max(0.2, orbit.phi - dy * 0.003));
+        applyOrbit();
+      });
+      const endDrag = () => {
+        drag = null;
+        if (state.experience) setKeyTarget('KeyF', false);
+      };
+      canvas.addEventListener('pointerup', endDrag);
+      canvas.addEventListener('pointercancel', endDrag);
+      canvas.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        orbit.radius = Math.min(20, Math.max(2, orbit.radius * Math.exp(event.deltaY * 0.001)));
+        applyOrbit();
+      }, { passive: false });
+
+      // ---- UI bindings -------------------------------------------------
+      explodeButton.addEventListener('click', () => toggleExplode());
+      document.querySelector('#btn-reset-view').addEventListener('click', () => resetCamera());
+      document.querySelector('#btn-restore').addEventListener('click', () => restoreDefaults());
+      document.querySelector('#toggle-autorotate').addEventListener('change', (event) => {
+        if (event.target.checked) toast('自动展示已开启');
+      });
+      experienceInput.addEventListener('change', () => setExperience(experienceInput.checked));
+      nameInput.addEventListener('input', () => setProfileName(nameInput.value));
+
+      // ---- canvas drawing ---------------------------------------------
+      const dpr = window.devicePixelRatio || 1;
+      function resizeCanvas() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (width <= 0 || height <= 0) return false;
+        const nextWidth = Math.max(1, Math.round(width * dpr));
+        const nextHeight = Math.max(1, Math.round(height * dpr));
+        if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+          canvas.width = nextWidth;
+          canvas.height = nextHeight;
+        }
+        return true;
+      }
+      function draw() {
+        if (!resizeCanvas()) return;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        const glow = ctx.createRadialGradient(width * 0.55, height * 0.4, 10, width * 0.55, height * 0.4, Math.max(width, height) * 0.7);
+        glow.addColorStop(0, 'rgba(120, 78, 46, 0.55)');
+        glow.addColorStop(1, 'rgba(11, 10, 9, 0)');
+        ctx.fillStyle = '#0b0a09';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, width, height);
+
+        const caseItem = CASE_BY_ID[config.caseId] || CASES[0];
+        const keycapItem = KEYCAP_BY_ID[config.keycapId] || KEYCAPS[0];
+        const boardWidth = Math.min(width * 0.82, 900);
+        const pitch = boardWidth / 15.6;
+        const boardHeight = pitch * 5.9;
+        const originX = (width - boardWidth) / 2;
+        const originY = (height - boardHeight) / 2 - explodeProgress * pitch * 0.2;
+        const radius = pitch * 0.42;
+
+        // case body
+        ctx.beginPath();
+        const pad = pitch * 0.45;
+        const left = originX - pad;
+        const top = originY - pad;
+        const bodyWidth = boardWidth + pad * 2;
+        const bodyHeight = boardHeight + pad * 2;
+        ctx.roundRect ? ctx.roundRect(left, top, bodyWidth, bodyHeight, radius) : ctx.rect(left, top, bodyWidth, bodyHeight);
+        ctx.fillStyle = caseItem.caseColor;
+        ctx.fill();
+        ctx.lineWidth = Math.max(1, pitch * 0.04);
+        ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+        ctx.stroke();
+
+        // keys (caps rise when exploded)
+        const rise = explodeProgress * pitch * 1.1;
+        let index = 0;
+        for (let row = 0; row < ROWS.length; row += 1) {
+          for (let col = 0; col < ROWS[row]; col += 1) {
+            const color = col >= ROWS[row] - 2 ? keycapItem.colors[2] : col === 0 ? keycapItem.colors[1] : keycapItem.colors[0];
+            const x = originX + col * pitch + pitch * 0.08;
+            const y = originY + row * pitch * 1.06 + pitch * 0.08 - rise;
+            const w = pitch * 0.86;
+            const h = pitch * 0.92;
+            ctx.beginPath();
+            ctx.roundRect ? ctx.roundRect(x, y, w, h, pitch * 0.14) : ctx.rect(x, y, w, h);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,0.28)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            index += 1;
+          }
+        }
+
+        // caption for QA evidence
+        ctx.fillStyle = 'rgba(242,237,228,0.5)';
+        ctx.font = `${Math.max(9, pitch * 0.32)}px "Segoe UI", sans-serif`;
+        ctx.fillText('QA FIXTURE · not the product page', originX, top + bodyHeight + pitch * 0.9);
+      }
+
+      // ---- animation loop ---------------------------------------------
+      let lastFrame = performance.now();
+      function frame(now) {
+        const delta = Math.min(0.05, (now - lastFrame) / 1000);
+        lastFrame = now;
+        explodeProgress += (state.explodeTarget - explodeProgress) * 0.22;
+        if (Math.abs(state.explodeTarget - explodeProgress) < 0.0005) explodeProgress = state.explodeTarget;
+        for (const key of keys) {
+          key.press += ((key.target ? 1 : 0) - key.press) * 0.3;
+          if (Math.abs((key.target ? 1 : 0) - key.press) < 0.0005) key.press = key.target ? 1 : 0;
+          key.pressed = key.target === 1;
+          key.offset = -0.15 * key.press;
+        }
+        syncUI();
+        draw();
+        requestAnimationFrame(frame);
+      }
+
+      // ---- public test API --------------------------------------------
+      function keyScreen(key) {
+        const rect = canvas.getBoundingClientRect();
+        const padX = rect.width * 0.09;
+        const padY = rect.height * 0.16;
+        const cellWidth = (rect.width - padX * 2) / 15;
+        const cellHeight = (rect.height - padY * 2) / 5;
+        return {
+          x: rect.left + padX + cellWidth * (key.col + 0.5),
+          y: rect.top + padY + cellHeight * (key.row + 0.5),
+        };
+      }
+      function keySnapshot(key) {
+        const screen = keyScreen(key);
+        return {
+          code: key.code,
+          label: key.label,
+          pressed: key.pressed,
+          press: round(key.press),
+          offset: round(key.offset),
+          worldPosition: [key.col * 1 - 7.5, key.row * 1.06, -riseFor(key)],
+          screen,
+          inView: screen.x >= 0 && screen.x <= window.innerWidth && screen.y >= 0 && screen.y <= window.innerHeight,
+        };
+      }
+      function riseFor(key) {
+        return -0.15 * key.press;
+      }
+
+      function whenSettled(timeoutMs = 4000) {
+        return new Promise((resolve) => {
+          const started = performance.now();
+          const tick = () => {
+            const keysSettled = keys.every((key) => Math.abs(key.press) < 0.002);
+            const explodedSettled = Math.abs(state.explodeTarget - explodeProgress) < 0.001;
+            if (keysSettled && explodedSettled) resolve(true);
+            else if (performance.now() - started > timeoutMs) resolve(false);
+            else requestAnimationFrame(tick);
+          };
+          tick();
+        });
+      }
+
+      const LumenTestApi = {
+        version: 'qa-mock-1.0.0',
+        storageKey: STORAGE_KEY,
+        getState() {
+          return {
+            caseId: config.caseId,
+            keycapId: config.keycapId,
+            profileName: config.profileName,
+            experience: state.experience,
+            exploded: state.exploded,
+            explodeTarget: state.explodeTarget,
+            explodeProgress: round(explodeProgress),
+            camera: cameraSnapshot(),
+            layers: { caps: 1.6 * explodeProgress, plate: 0.62 * explodeProgress, case_: 0 },
+            keys: keys.length,
+            ready: window.__LUMEN_READY__ === true,
+          };
+        },
+        setCase,
+        setKeycap,
+        setExperience,
+        toggleExplode,
+        setExploded,
+        resetCamera,
+        getCamera: cameraSnapshot,
+        getKey(code) {
+          const key = keyByCode[code];
+          return key ? keySnapshot(key) : null;
+        },
+        pressVirtual(code) {
+          if (!state.experience) return;
+          setKeyTarget(code, true);
+        },
+        releaseVirtual(code) {
+          if (!state.experience) return;
+          setKeyTarget(code, false);
+        },
+        whenSettled,
+        getSceneInfo() {
+          return {
+            renderer: 'webgl2',
+            pixelRatio: dpr,
+            canvas: { width: canvas.width, height: canvas.height, clientWidth: canvas.clientWidth, clientHeight: canvas.clientHeight },
+            keyCount: keys.length,
+            rows: [...ROWS],
+            theme: { case: config.caseId, keycap: config.keycapId },
+            labelsVisible: explodeProgress > 0.02,
+          };
+        },
+      };
+      window.__LUMEN__ = LumenTestApi;
+      window.__LUMEN_READY__ = false;
+
+      // ---- boot --------------------------------------------------------
+      buildOptions();
+      nameInput.value = config.profileName;
+      persist();
+      syncUI();
+      requestAnimationFrame(() => {
+        draw();
+        document.body.dataset.appReady = 'true';
+        window.__LUMEN_READY__ = true;
+        requestAnimationFrame(frame);
+      });
+    </script>
+  </body>
+</html>

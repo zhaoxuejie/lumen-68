@@ -1,0 +1,21 @@
+{
+  "name": "lumen-68",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LUMEN 68 — an interactive 3D mechanical keyboard showcase & configurator built with Three.js and Vite.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build",
+    "build:single": "node scripts/build-single.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "verify": "node verify/run.mjs"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.49.0",
+    "vite": "^6.1.0"
+  }
+}

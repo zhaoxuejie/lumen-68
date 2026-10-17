@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LUMEN 68 · 光屿 — 68 键机械键盘</title>
+    <meta
+      name="description"
+      content="LUMEN 68 / 光屿：68 键紧凑机械键盘。CNC 铝合金一体底壳、Gasket 悬浮结构、热插拔轴座与 PBT 键帽。实时三维预览，自由配置外壳与键帽。"
+    />
+    <meta name="theme-color" content="#0b0a09" />
+    <meta name="color-scheme" content="dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3CradialGradient%20id='g'%20cx='42%25'%20cy='34%25'%20r='70%25'%3E%3Cstop%20offset='0'%20stop-color='%23f0c79a'/%3E%3Cstop%20offset='1'%20stop-color='%23a9704f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect%20width='64'%20height='64'%20rx='16'%20fill='%230b0a09'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='15'%20fill='none'%20stroke='url(%23g)'%20stroke-width='3'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='5.5'%20fill='%23ecb98a'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#panel">跳到配置面板</a>
+
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="9.2" stroke="currentColor" stroke-opacity=".32" stroke-width="1" />
+              <circle cx="14" cy="14" r="5.4" stroke="currentColor" stroke-opacity=".62" stroke-width="1" />
+              <circle cx="14" cy="14" r="2.1" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">LUMEN</span>
+            <span class="brand-sub">STUDIO · 光屿</span>
+          </span>
+        </div>
+        <div class="header-meta">
+          <span class="header-badge">
+            <span class="header-badge-dot" aria-hidden="true"></span>
+            概念产品 · CONCEPT
+          </span>
+          <span class="header-index micro" aria-hidden="true">SERIES 01 / No.068</span>
+        </div>
+      </header>
+
+      <main class="showcase">
+        <section class="stage" aria-labelledby="hero-title">
+          <div class="hero">
+            <div class="hero-copy">
+              <p class="micro hero-kicker">
+                <span class="hero-kicker-line" aria-hidden="true"></span>
+                KEYBOARD SERIES · 01
+              </p>
+              <h1 id="hero-title" class="hero-title">LUMEN <span class="hero-title-num">68</span></h1>
+              <p class="hero-sub">光屿 · 68 键机械键盘</p>
+              <p class="hero-lede">
+                把一束光，收进 68 次敲击。CNC 铝合金机身与 Gasket 悬浮结构，为桌面留出呼吸的空间。
+              </p>
+            </div>
+            <ul class="hero-chips" aria-label="产品参数">
+              <li class="chip"><span class="chip-en">68 KEYS</span><span class="chip-cn">紧凑布局</span></li>
+              <li class="chip"><span class="chip-en">CNC ALUMINUM</span><span class="chip-cn">铝合金</span></li>
+              <li class="chip"><span class="chip-en">GASKET</span><span class="chip-cn">悬浮结构</span></li>
+              <li class="chip"><span class="chip-en">HOT-SWAP</span><span class="chip-cn">热插拔</span></li>
+            </ul>
+          </div>
+
+          <div id="viewport" class="viewport" aria-label="LUMEN 68 三维产品预览">
+            <div class="viewport-glow" aria-hidden="true"></div>
+            <div class="viewport-floor" aria-hidden="true"></div>
+            <div id="layer-labels" aria-hidden="true"></div>
+            <div class="viewport-shade" aria-hidden="true"></div>
+            <p class="viewport-badge viewport-badge--tl micro" aria-hidden="true">
+              PRODUCT PREVIEW <span class="badge-dot" aria-hidden="true"></span> 实时渲染
+            </p>
+            <p class="viewport-badge viewport-badge--tr micro" aria-hidden="true">LUMEN 68 / 光屿</p>
+
+            <div class="viewport-toolbar">
+              <button id="btn-reset-view" class="tool-btn" type="button">
+                <svg class="tool-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                  <path d="M3 3v5h5" />
+                </svg>
+                <span>复位视角</span>
+              </button>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <div class="tool-switch">
+                <input id="toggle-autorotate" class="switch switch--sm" type="checkbox" />
+                <label class="tool-switch-label" for="toggle-autorotate">自动展示</label>
+              </div>
+            </div>
+
+            <p id="experience-hint" class="experience-hint" hidden></p>
+            <p class="sr-only">
+              三维预览支持拖拽旋转与滚轮缩放；右侧配置面板可切换外壳、键帽与拆解视图。
+            </p>
+          </div>
+        </section>
+
+        <aside id="panel" class="panel" aria-labelledby="panel-title">
+          <div class="panel-scroll">
+            <header class="panel-head">
+              <p class="micro panel-kicker">
+                <span class="pulse-dot" aria-hidden="true"></span>
+                CONFIGURE / 01
+              </p>
+              <h2 id="panel-title" class="panel-title">配置你的 LUMEN 68</h2>
+              <p class="panel-sub">三种外壳 × 三种键帽，实时映射到三维预览。</p>
+            </header>
+
+            <section class="panel-section" aria-labelledby="case-heading">
+              <div class="section-head">
+                <h3 id="case-heading" class="section-title">
+                  外壳<span class="section-title-en" aria-hidden="true">CASE FINISH</span>
+                </h3>
+              </div>
+              <div id="case-options" class="option-grid" role="group" aria-labelledby="case-heading"></div>
+            </section>
+
+            <section class="panel-section" aria-labelledby="keycap-heading">
+              <div class="section-head">
+                <h3 id="keycap-heading" class="section-title">
+                  键帽<span class="section-title-en" aria-hidden="true">KEYCAP SET</span>
+                </h3>
+              </div>
+              <div id="keycap-options" class="option-grid" role="group" aria-labelledby="keycap-heading"></div>
+            </section>
+
+            <section class="panel-section" aria-labelledby="summary-heading">
+              <div class="section-head">
+                <h3 id="summary-heading" class="section-title">
+                  配置摘要<span class="section-title-en" aria-hidden="true">YOUR BUILD</span>
+                </h3>
+              </div>
+              <div class="summary-card">
+                <div class="summary-name-row">
+                  <span class="summary-label">配置名</span>
+                  <span id="summary-name" class="summary-name">我的 LUMEN 68</span>
+                </div>
+                <dl class="summary-list">
+                  <div class="summary-row summary-row--case">
+                    <dt class="summary-label">外壳</dt>
+                    <dd class="summary-value">
+                      <span id="summary-case">月银</span>
+                      <span id="summary-case-meta" class="summary-meta">喷砂阳极氧化</span>
+                    </dd>
+                  </div>
+                  <div class="summary-row summary-row--keycap">
+                    <dt class="summary-label">键帽</dt>
+                    <dd class="summary-value">
+                      <span id="summary-keycap">雾白</span>
+                      <span id="summary-keycap-meta" class="summary-meta">PBT · 热升华</span>
+                    </dd>
+                  </div>
+                </dl>
+                <p class="save-line" data-state="idle">
+                  <span class="save-dot" aria-hidden="true"></span>
+                  <span id="save-status">自动保存已开启 · 本机</span>
+                </p>
+              </div>
+            </section>
+
+            <section class="panel-section panel-section--primary" aria-label="视图与体验控制">
+              <button id="btn-explode" class="btn-primary" type="button" aria-pressed="false">
+                <span class="btn-primary-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 2.5 9 5-9 5-9-5 9-5Z" />
+                    <path d="m3 12.5 9 5 9-5" />
+                    <path d="m3 17 9 5 9-5" />
+                  </svg>
+                </span>
+                <span id="btn-explode-label" class="btn-primary-label">拆解视图</span>
+                <span class="btn-primary-tail" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 8h9" />
+                    <path d="m8.5 4.5 3.5 3.5-3.5 3.5" />
+                  </svg>
+                </span>
+              </button>
+
+              <div class="experience-row">
+                <div class="experience-copy">
+                  <p class="experience-title">键帽体验</p>
+                  <p id="experience-status" class="experience-status">开启后，可用键盘敲击感受 Gasket 回弹。</p>
+                </div>
+                <label class="switch-field" for="toggle-experience">
+                  <input id="toggle-experience" class="switch" type="checkbox" aria-describedby="experience-status" />
+                  <span class="sr-only">键帽体验</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="panel-section" aria-labelledby="name-heading">
+              <div class="section-head">
+                <h3 id="name-heading" class="section-title">
+                  配置命名<span class="section-title-en" aria-hidden="true">SIGNATURE</span>
+                </h3>
+              </div>
+              <div class="field">
+                <label class="sr-only" for="profile-name">配置名称</label>
+                <input
+                  id="profile-name"
+                  class="text-input"
+                  type="text"
+                  maxlength="24"
+                  autocomplete="off"
+                  spellcheck="false"
+                  placeholder="我的 LUMEN 68"
+                  aria-describedby="name-help"
+                />
+                <span class="field-limit micro" aria-hidden="true">24 MAX</span>
+              </div>
+              <p id="name-help" class="field-help">写下一个只属于这套桌面的名字，随配置保存在本机。</p>
+            </section>
+
+            <div class="panel-bottom">
+              <div class="panel-secondary">
+                <button id="btn-restore" class="btn-ghost" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 14 4 9l5-5" />
+                    <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />
+                  </svg>
+                  <span>恢复默认</span>
+                </button>
+                <button class="btn-ghost btn-ghost--proxy" type="button" data-proxy-target="btn-reset-view">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                    <path d="M3 3v5h5" />
+                  </svg>
+                  <span>复位视角</span>
+                </button>
+              </div>
+              <p class="panel-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4.5" y="10.5" width="15" height="9.5" rx="2.2" />
+                  <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+                </svg>
+                <span>配置保存在本机 · 不会上传</span>
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="site-footer">
+        <p class="footer-tips">
+          <span class="kbd">拖拽</span><span>旋转</span>
+          <span class="footer-sep" aria-hidden="true">·</span>
+          <span class="kbd">滚轮</span><span>缩放</span>
+        </p>
+        <p class="key-echo-wrap">
+          <span class="key-echo-label micro" aria-hidden="true">KEY ECHO</span>
+          <span id="key-echo" class="key-echo" aria-live="off"></span>
+        </p>
+        <p class="footer-credit micro">LUMEN STUDIO · 本机保存 · 无云端同步</p>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
